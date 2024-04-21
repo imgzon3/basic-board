@@ -11,7 +11,7 @@
     ·
     <a href="https://github.com/imgzon3/basic-board/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=">Request Feature</a>
     <br /><br />
-    <a href="https://www.notion.so/imgzon3/9f9cb50694fb4fdda5f60066af0bdad4">
+    <a href="https://imgzon3.notion.site/9f9cb50694fb4fdda5f60066af0bdad4?pvs=4">
       <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/>
     </a>
     <a href="https://www.instagram.com/igrus_inha/">
