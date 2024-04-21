@@ -26,7 +26,7 @@
 - [Tech Stacks](#tech-stacks)
 - [Contributors](#contributors)
 
-## [프로젝트 소개 및 목적](#목차)
+## 프로젝트 소개 및 목적
 - **basic-board**는 `Spring boot`를 학습하기 위한 게시판 프로젝트입니다.
 - 구조를 설계하고 구현해 보는 것이 목적입니다.
   - `Spring MVC`패턴을 통해 웹페이지를 만들어봅니다.
@@ -34,13 +34,13 @@
 - 다양한 기술 스택을 학습하고, 적용합니다.
 
 
-## [개발 기간](#목차)
+## 개발 기간
 - 2024.04 ~
 
-## [Tech Stacks](#목차)
+## Tech Stacks
 
 
-## [Contributors](#목차)
+## Contributors
 <table>
   <tr>
     <td align="center">
