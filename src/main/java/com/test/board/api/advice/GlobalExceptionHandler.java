@@ -1,8 +1,7 @@
-package com.test.board.advice;
+package com.test.board.api.advice;
 
-import com.test.board.dto.error.ErrorCode;
-import com.test.board.dto.error.ErrorResponse;
-import com.test.board.dto.error.ErrorResponse.FieldError;
+import com.test.board.api.dto.error.ErrorCode;
+import com.test.board.api.dto.error.ErrorResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +79,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({MissingServletRequestParameterException.class, MissingServletRequestPartException.class})
     protected ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(Exception e) {
         log.error("MissingServletRequestParameter/PartException", e);
-        final List<FieldError> errors = FieldError.of(this.getRequestParam(e), "", ErrorCode.REQUEST_PARAMETER_MISSING.getMessage());
+        final List<ErrorResponse.FieldError> errors = ErrorResponse.FieldError.of(this.getRequestParam(e), "", ErrorCode.REQUEST_PARAMETER_MISSING.getMessage());
         final ErrorResponse response = ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, errors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -93,7 +92,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("MethodArgumentTypeMismatchException", e);
         final String value = e.getValue() == null ? "" : e.getValue().toString();
-        final List<FieldError> errors = FieldError.of(e.getName(), value, e.getErrorCode());
+        final List<ErrorResponse.FieldError> errors = ErrorResponse.FieldError.of(e.getName(), value, e.getErrorCode());
         final ErrorResponse response = ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, errors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -128,29 +127,29 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private List<FieldError> getErrors(final BindingResult bindingResult) {
+    private List<ErrorResponse.FieldError> getErrors(final BindingResult bindingResult) {
         final List<org.springframework.validation.FieldError> fieldErrors = bindingResult.getFieldErrors();
         return fieldErrors.stream()
-                .map(error -> new FieldError(
+                .map(error -> new ErrorResponse.FieldError(
                         error.getField(),
                         error.getRejectedValue() == null ? "" : error.getRejectedValue().toString(),
                         error.getDefaultMessage()))
                 .collect(Collectors.toList());
     }
 
-    private List<FieldError> getErrors(final Set<ConstraintViolation<?>> constraintViolations) {
+    private List<ErrorResponse.FieldError> getErrors(final Set<ConstraintViolation<?>> constraintViolations) {
         final List<ConstraintViolation<?>> lists = new ArrayList<>(constraintViolations);
         return lists.stream()
-                .map(error -> new FieldError(
+                .map(error -> new ErrorResponse.FieldError(
                         error.getPropertyPath() == null ? "" : error.getPropertyPath().toString(),
                         error.getInvalidValue() == null ? "" : error.getInvalidValue().toString(),
                         error.getMessage()
                 )).collect(Collectors.toList());
     }
 
-    private List<FieldError> getErrors(final List<ParameterValidationResult> parameterValidationResults) {
+    private List<ErrorResponse.FieldError> getErrors(final List<ParameterValidationResult> parameterValidationResults) {
         return parameterValidationResults.stream()
-                .map(error -> new FieldError(
+                .map(error -> new ErrorResponse.FieldError(
                         "parameter ".concat(String.valueOf(error.getMethodParameter().getParameterIndex())),
                         error.getArgument() == null ? "" : error.getArgument().toString(),
                         error.getResolvableErrors().get(0).getDefaultMessage()

@@ -1,4 +1,4 @@
-package com.test.board.dto.error;
+package com.test.board.api.dto.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
