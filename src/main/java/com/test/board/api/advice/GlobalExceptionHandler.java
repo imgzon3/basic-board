@@ -2,6 +2,7 @@ package com.test.board.api.advice;
 
 import com.test.board.api.dto.error.ErrorCode;
 import com.test.board.api.dto.error.ErrorResponse;
+import com.test.board.api.exception.BusinessException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -115,6 +116,17 @@ public class GlobalExceptionHandler {
         log.error("HttpRequestMethodNotSupportedException", e);
         final ErrorResponse response = ErrorResponse.of(ErrorCode.METHOD_NOT_ALLOWED);
         return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    /**
+     * <b>Business logic</b>에서 발생하는 예외 처리
+     */
+    @ExceptionHandler
+    protected ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
+        log.error("BusinessException", e);
+        final ErrorCode errorCode = e.getErrorCode();
+        final ErrorResponse response = ErrorResponse.of(errorCode, e.getMessage(), e.getErrors());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
     }
 
     /**
