@@ -20,7 +20,7 @@ public enum ErrorCode {
 
     ;
 
-    private int status;
+    private final int status;
     private final String code;
     private final String message;
 }
