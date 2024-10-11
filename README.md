@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/imgzon3/basic-board">
-    <img src="https://github.com/imgzon3/basic-board/blob/master/.github/img/icon3.png?raw=true" alt="Logo" width="130" height="130">
+    <img src="https://github.com/imgzon3/basic-board/blob/master/.github/img/icon.png?raw=true" alt="Logo" width="130" height="130">
   </a>
   <h3 align="center">basic-board</h3>
 
