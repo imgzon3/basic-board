@@ -25,11 +25,11 @@ public class ErrorResponse {
         this.message = errorCode.getMessage();
     }
 
-    public static ErrorResponse of (final ErrorCode errorCode, final List<FieldError> fieldErrors) {
+    public static ErrorResponse of(final ErrorCode errorCode, final List<FieldError> fieldErrors) {
         return new ErrorResponse(errorCode, fieldErrors);
     }
 
-    public static ErrorResponse of (final ErrorCode errorCode) {
+    public static ErrorResponse of(final ErrorCode errorCode) {
         return new ErrorResponse(errorCode);
     }
 
